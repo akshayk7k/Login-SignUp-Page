@@ -4,13 +4,13 @@ import { getFirestore, getDoc, doc } from "https://www.gstatic.com/firebasejs/10
 
 // Firebase Configuration
 const firebaseConfig = {
-    apiKey: "AIzaSyAst7AKIa9a7n6P1dEB2d6L-8MZIV1bilI",
-    authDomain: "login-signup-f18e8.firebaseapp.com",
-    projectId: "login-signup-f18e8",
-    storageBucket: "login-signup-f18e8.firebasestorage.app",
-    messagingSenderId: "134879491884",
-    appId: "1:134879491884:web:ab30b613115d94c2ef5e89",
-    measurementId: "G-LD8JMQ80X1"
+   apiKey: "****************",
+    authDomain: "*************firebaseapp.com",
+    projectId: "********************",
+    storageBucket: "************.firebasestorage.app",
+    messagingSenderId: "***************",
+    appId: "***********************************",
+    measurementId: "****************"
   };
 
 // Initialize Firebase
