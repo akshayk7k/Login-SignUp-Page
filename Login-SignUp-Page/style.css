@@ -1,0 +1,224 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:"Poppins",sans-serif;
+}
+body{
+    background-color: #c9d6ff;
+    background:linear-gradient(to right,#e2e2e2,#c9d6ff);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+.container{
+    background:#fff;
+    width:450px;
+    padding:2rem;
+    margin:50px auto;
+    border-radius:10px;
+    box-shadow:0 20px 35px rgba(0,0,0,0.2);
+}
+form{
+    margin:0 2rem;
+}
+.form-title{
+    font-size:2rem;
+    font-weight:bold;
+    text-align:center;
+    padding:1.3rem;
+    margin-bottom:1rem;
+    color: #333;
+}
+.input-group{
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+.input-group i{
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    color: #666;
+    font-size: 1.1rem;
+}
+input{
+    width: 100%;
+    padding: 10px 0 10px 30px;
+    font-size: 1rem;
+    color: #333;
+    border: none;
+    border-bottom: 2px solid #ddd;
+    background: transparent;
+    transition: border-color 0.3s ease;
+}
+input:focus{
+    outline: none;
+    border-bottom-color: #6a11cb;
+}
+input::placeholder{
+    color: transparent;
+}
+label{
+    position: absolute;
+    top: 50%;
+    left: 30px;
+    transform: translateY(-50%);
+    color: #666;
+    font-size: 1rem;
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+input:focus~label,input:not(:placeholder-shown)~label{
+    top: -5px;
+    left: 0;
+    font-size: 0.9rem;
+    color: #6a11cb;
+}
+.recover {
+    text-align: right;
+    margin: 0.8rem 0;
+}
+.recover a {
+    color: #6a11cb;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+.recover a:hover {
+    color: #2575fc;
+    text-decoration: underline;
+}
+.btn {
+    width: 100%;
+    padding: 12px;
+    font-size: 1.1rem;
+    color: #fff;
+    background: linear-gradient(to right, #6a11cb, #2575fc);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 1rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(37, 117, 252, 0.3);
+}
+.btn:active {
+    transform: translateY(0);
+}
+.or{
+    text-align: center;
+    font-size: 1rem;
+    color: #666;
+    margin: 1.5rem 0;
+    position: relative;
+}
+.or::before,
+.or::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 45%;
+    height: 1px;
+    background-color: #ddd;
+}
+.or::before {
+    left: 0;
+}
+.or::after {
+    right: 0;
+}
+.icons{
+    display: flex;
+    justify-content: center;
+    margin: 1rem 0;
+}
+.icons i{
+    width: 50px;
+    height: 50px;
+    border: 2px solid #ddd;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #6a11cb;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.icons i:hover{
+    background: #6a11cb;
+    color: #fff;
+    border-color: #6a11cb;
+    transform: scale(1.1);
+}
+.links{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+.links p {
+    color: #666;
+    font-size: 0.9rem;
+}
+#signUpButton, #signInButton{
+    background: none;
+    border: none;
+    color: #6a11cb;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+#signUpButton:hover, #signInButton:hover {
+    color: #2575fc;
+    text-decoration: underline;
+}
+.messageDiv {
+    padding: 12px;
+    margin: 1rem 0;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 0.9rem;
+    display: none;
+    animation: fadeIn 0.3s ease;
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    color: #333;
+}
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+/* Responsive Design */
+@media (max-width: 480px) {
+    .container {
+        width: 90%;
+        padding: 1.5rem;
+        margin: 20px auto;
+    }
+    form {
+        margin: 0 1rem;
+    }
+    .form-title {
+        font-size: 1.5rem;
+        padding: 1rem;
+    }
+    .icons i {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+    }
+} 

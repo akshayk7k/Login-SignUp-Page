@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register & Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="/Login-SignUp-Page/style.css">
+</head>
+<body>
+    <div class="container" id="signup" style="display:none;">
+        <h1 class="form-title">Register</h1>
+        <form id="signUpForm">
+            <div id="signUpMessage" class="messageDiv"></div>
+            <div class="input-group">
+                <i class="fas fa-user"></i>
+                <input type="text" id="fName" placeholder="First Name" required>
+                <label for="fName">First Name</label>
+            </div>
+            <div class="input-group">
+                <i class="fas fa-user"></i>
+                <input type="text" id="lName" placeholder="Last Name" required>
+                <label for="lName">Last Name</label>
+            </div>
+            <div class="input-group">
+                <i class="fas fa-envelope"></i>
+                <input type="email" id="rEmail" placeholder="Email" required>
+                <label for="rEmail">Email</label>
+            </div>
+            <div class="input-group">
+                <i class="fas fa-lock"></i>
+                <input type="password" id="rPassword" placeholder="Password" required>
+                <label for="rPassword">Password</label>
+            </div>
+            <button class="btn" id="submitSignUp" type="submit">Sign Up</button>
+        </form>
+        <p class="or">----------or--------</p>
+        <div class="icons">
+            <i class="fab fa-google" id="google-signin"></i>
+        </div>
+        <div class="links">
+            <p>Already Have an Account?</p>
+            <button id="signInButton">Sign In</button>
+        </div>
+    </div>
+
+    <div class="container" id="signIn">
+        <h1 class="form-title">Sign In</h1>
+        <form id="signInForm">
+            <div id="signInMessage" class="messageDiv"></div>
+            <div class="input-group">
+                <i class="fas fa-envelope"></i>
+                <input type="email" id="email" placeholder="Email" required>
+                <label for="email">Email</label>
+            </div>
+            <div class="input-group">
+                <i class="fas fa-lock"></i>
+                <input type="password" id="password" placeholder="Password" required>
+                <label for="password">Password</label>
+            </div>
+            <p class="recover">
+                <a href="#" id="forgotPassword">Forgot Password?</a>
+            </p>
+            <button class="btn" id="submitSignIn" type="submit">Sign In</button>
+        </form>
+        <p class="or">----------or--------</p>
+        <div class="icons">
+            <i class="fab fa-google" id="google-signin"></i>
+        </div>
+        <div class="links">
+            <p>Don't have an account yet?</p>
+            <button id="signUpButton">Sign Up</button>
+        </div>
+    </div>
+
+    <script type="module" src="/Login-SignUp-Page/firebaseauth.js"></script>
+    <script type="module">
+        import { auth, signInWithGoogle, signInUser, signUpUser, resetPassword } from "/Login-SignUp-Page/firebaseauth.js";
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Form switching
+            document.getElementById('signUpButton').addEventListener('click', () => {
+                document.getElementById('signIn').style.display = 'none';
+                document.getElementById('signup').style.display = 'block';
+            });
+
+            document.getElementById('signInButton').addEventListener('click', () => {
+                document.getElementById('signup').style.display = 'none';
+                document.getElementById('signIn').style.display = 'block';
+            });
+
+            // Google sign-in
+            document.querySelectorAll('.fab.fa-google').forEach(button => {
+                button.addEventListener('click', async () => {
+                    try {
+                        await signInWithGoogle();
+                    } catch (error) {
+                        console.error('Google sign-in error:', error);
+                    }
+                });
+            });
+
+            // Sign up form submission
+            document.getElementById('signUpForm').addEventListener('submit', async (event) => {
+                event.preventDefault();
+                const firstName = document.getElementById('fName').value.trim();
+                const lastName = document.getElementById('lName').value.trim();
+                const email = document.getElementById('rEmail').value.trim();
+                const password = document.getElementById('rPassword').value;
+
+                if (firstName && lastName && email && password) {
+                    await signUpUser(email, password, firstName, lastName);
+                }
+            });
+
+            // Sign in form submission
+            document.getElementById('signInForm').addEventListener('submit', async (event) => {
+                event.preventDefault();
+                const email = document.getElementById('email').value.trim();
+                const password = document.getElementById('password').value;
+
+                if (email && password) {
+                    await signInUser(email, password);
+                }
+            });
+
+            // Forgot password functionality
+            document.getElementById('forgotPassword').addEventListener('click', async (e) => {
+                e.preventDefault();
+                const email = document.getElementById('email').value.trim();
+                const messageDiv = document.getElementById('signInMessage');
+
+                if (!email) {
+                    messageDiv.textContent = 'Please enter your email address first.';
+                    messageDiv.style.display = 'block';
+                    return;
+                }
+
+                try {
+                    await resetPassword(email);
+                    messageDiv.textContent = 'Password reset email sent! Please check your inbox.';
+                    messageDiv.style.display = 'block';
+                } catch (error) {
+                    console.error('Password reset error:', error);
+                    messageDiv.textContent = 'Failed to send reset email. Please try again.';
+                    messageDiv.style.display = 'block';
+                }
+
+                setTimeout(() => {
+                    messageDiv.style.display = 'none';
+                }, 5000);
+            });
+        });
+    </script>
+</body>
+</html>
